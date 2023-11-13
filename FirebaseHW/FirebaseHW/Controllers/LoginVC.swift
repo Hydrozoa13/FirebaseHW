@@ -60,9 +60,7 @@ class LoginVC: UIViewController {
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] user, error in
             if let error {
                 self?.displayErrorLbl(withText: "\(error)")
-            } else if user != nil {
-                self?.performSegue(withIdentifier: "goToTasksTVC", sender: nil)
-            }
+            } 
         }
     }
     
