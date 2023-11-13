@@ -23,6 +23,20 @@ class TasksTVC: UITableViewController {
         ref = Database.database().reference(withPath: "users").child(user.uid).child("tasks")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        ref.observe(.value) { [weak self] snapshot in
+            var tasks = [Task]()
+            for item in snapshot.children {
+                guard let snapshot = item as? DataSnapshot,
+                      let task = Task(snapshot: snapshot) else { return }
+                tasks.append(task)
+            }
+            self?.tasks = tasks
+            self?.tableView.reloadData()
+        }
+    }
+    
     @IBAction func addTask(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: "New task",
                                                 message: "Add new task",
