@@ -42,6 +42,8 @@
 		D1BBE94E2B0253EF003C5E4E /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = D1BBE94D2B0253EF003C5E4E /* FirebaseStorageCombine-Community */; };
 		D1BBE9532B025B67003C5E4E /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BBE9522B025B67003C5E4E /* LoginVC.swift */; };
 		D1BBE9552B026D49003C5E4E /* TasksTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BBE9542B026D49003C5E4E /* TasksTVC.swift */; };
+		D1BBE9582B029AA4003C5E4E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BBE9572B029AA4003C5E4E /* User.swift */; };
+		D1BBE95A2B029AB1003C5E4E /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BBE9592B029AB1003C5E4E /* Task.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +57,8 @@
 		D1BBE9162B025324003C5E4E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D1BBE9522B025B67003C5E4E /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		D1BBE9542B026D49003C5E4E /* TasksTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTVC.swift; sourceTree = "<group>"; };
+		D1BBE9572B029AA4003C5E4E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		D1BBE9592B029AB1003C5E4E /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +118,7 @@
 		D1BBE9012B0252CB003C5E4E /* FirebaseHW */ = {
 			isa = PBXGroup;
 			children = (
+				D1BBE9562B029A98003C5E4E /* Models */,
 				D1BBE9512B025B39003C5E4E /* Controllers */,
 				D1BBE9502B0258DC003C5E4E /* Views */,
 				D1BBE94F2B0258C8003C5E4E /* AppDelegates */,
@@ -149,6 +154,15 @@
 				D1BBE9542B026D49003C5E4E /* TasksTVC.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		D1BBE9562B029A98003C5E4E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D1BBE9572B029AA4003C5E4E /* User.swift */,
+				D1BBE9592B029AB1003C5E4E /* Task.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,6 +272,8 @@
 				D1BBE9552B026D49003C5E4E /* TasksTVC.swift in Sources */,
 				D1BBE9032B0252CB003C5E4E /* AppDelegate.swift in Sources */,
 				D1BBE9052B0252CB003C5E4E /* SceneDelegate.swift in Sources */,
+				D1BBE9582B029AA4003C5E4E /* User.swift in Sources */,
+				D1BBE95A2B029AB1003C5E4E /* Task.swift in Sources */,
 				D1BBE9532B025B67003C5E4E /* LoginVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
