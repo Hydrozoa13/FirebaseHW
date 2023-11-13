@@ -36,11 +36,40 @@ class LoginVC: UIViewController {
         passwordTF.delegate = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        emailTF.text = nil
+        passwordTF.text = nil
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+        Auth.auth().removeStateDidChangeListener(authStateDidChangeListenerHandle)
+    }
+    
+    
+    @IBAction func login() {
+        guard let email = emailTF.text, !email.isEmpty,
+              let password = passwordTF.text, !password.isEmpty
+        else {
+            displayErrorLbl(withText: "Info is incorrect")
+            return
+        }
+        
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] user, error in
+            if let error {
+                self?.displayErrorLbl(withText: "\(error)")
+            } else if user != nil {
+                self?.performSegue(withIdentifier: "goToTasksTVC", sender: nil)
+            }
+        }
+    }
+    
     @IBAction func registration() {
         guard let email = emailTF.text, !email.isEmpty,
               let password = passwordTF.text, !password.isEmpty 
         else {
-            errorLbl.isHidden = false
             displayErrorLbl(withText: "Info is incorrect")
             return
         }
@@ -48,16 +77,12 @@ class LoginVC: UIViewController {
         Auth.auth().createUser(withEmail: email,
                                password: password) { [weak self] user, error in
             if let error {
-                self?.errorLbl.isHidden = false
                 self?.displayErrorLbl(withText: "\(error)")
             } else if let user {
                 let userRef = self?.ref.child(user.user.uid)
                 userRef?.setValue(["email": user.user.email])
             }
         }
-    }
-    
-    @IBAction func login(_ sender: UIButton) {
     }
 
     private func displayErrorLbl(withText text: String) {
@@ -73,6 +98,7 @@ class LoginVC: UIViewController {
             }
         ) { [weak self] _ in
             self?.errorLbl.alpha = 0
+            self?.errorLbl.isHidden = true
         }
     }
     
