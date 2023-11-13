@@ -119,7 +119,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Tasks" id="qBb-Zb-edb">
-                        <barButtonItem key="leftBarButtonItem" title="Sign Out" id="g4H-uw-WKG"/>
+                        <barButtonItem key="leftBarButtonItem" title="Sign Out" id="g4H-uw-WKG">
+                            <connections>
+                                <action selector="signOut:" destination="1GR-9s-U9h" id="EJ8-wB-ROK"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="iD8-GX-Wxa"/>
                             <barButtonItem title="AddImage" id="as9-kD-Gjx"/>

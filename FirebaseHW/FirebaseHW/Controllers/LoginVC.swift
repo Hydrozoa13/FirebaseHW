@@ -22,10 +22,10 @@ class LoginVC: UIViewController {
         super.viewDidLoad()
         errorLbl.alpha = 0
         ref = Database.database().reference(withPath: "users")
-//        authStateDidChangeListenerHandle = Auth.auth().addStateDidChangeListener({ [weak self] _, user in
-//            guard let _ = user else { return }
-//            self?.performSegue(withIdentifier: "goToTasksTVC", sender: nil)
-//        })
+        authStateDidChangeListenerHandle = Auth.auth().addStateDidChangeListener({ [weak self] _, user in
+            guard let _ = user else { return }
+            self?.performSegue(withIdentifier: "goToTasksTVC", sender: nil)
+        })
         
         NotificationCenter.default.addObserver(self, selector: #selector(kbWillShow),
                                                name: UIWindow.keyboardWillShowNotification, object: nil)
