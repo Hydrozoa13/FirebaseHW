@@ -22,10 +22,18 @@ class LoginVC: UIViewController {
         super.viewDidLoad()
         errorLbl.alpha = 0
         ref = Database.database().reference(withPath: "users")
-        authStateDidChangeListenerHandle = Auth.auth().addStateDidChangeListener({ [weak self] _, user in
-            guard let _ = user else { return }
-            self?.performSegue(withIdentifier: "goToTasksTVC", sender: nil)
-        })
+//        authStateDidChangeListenerHandle = Auth.auth().addStateDidChangeListener({ [weak self] _, user in
+//            guard let _ = user else { return }
+//            self?.performSegue(withIdentifier: "goToTasksTVC", sender: nil)
+//        })
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(kbWillShow),
+                                               name: UIWindow.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(kbWillHide),
+                                               name: UIWindow.keyboardWillHideNotification, object: nil)
+        
+        emailTF.delegate = self
+        passwordTF.delegate = self
     }
     
     @IBAction func registration() {
@@ -51,20 +59,6 @@ class LoginVC: UIViewController {
     
     @IBAction func login(_ sender: UIButton) {
     }
-    
-    
-    
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     private func displayErrorLbl(withText text: String) {
         errorLbl.text = text
@@ -80,5 +74,23 @@ class LoginVC: UIViewController {
         ) { [weak self] _ in
             self?.errorLbl.alpha = 0
         }
+    }
+    
+    @objc private func kbWillShow(notification: Notification) {
+        view.frame.origin.y = 0
+        if let kbSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            view.frame.origin.y -= (kbSize.height / 2)
+        }
+    }
+    
+    @objc private func kbWillHide() {
+        view.frame.origin.y = 0
+    }
+}
+
+extension LoginVC: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
 }
