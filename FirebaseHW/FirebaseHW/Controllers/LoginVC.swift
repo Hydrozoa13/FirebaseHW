@@ -24,11 +24,18 @@ class LoginVC: UIViewController {
     
     @IBAction func registration() {
         guard let email = emailTF.text, !email.isEmpty,
-              let password = passwordTF.text, !password.isEmpty else { return }
+              let password = passwordTF.text, !password.isEmpty 
+        else {
+            errorLbl.isHidden = false
+            displayErrorLbl(withText: "Info is incorrect")
+            return
+        }
+        
         Auth.auth().createUser(withEmail: email,
                                password: password) { [weak self] user, error in
             if let error {
-                print(error)
+                self?.errorLbl.isHidden = false
+                self?.displayErrorLbl(withText: "\(error)")
             } else if let user {
                 let userRef = self?.ref.child(user.user.uid)
                 userRef?.setValue(["email": user.user.email])
@@ -53,4 +60,19 @@ class LoginVC: UIViewController {
     }
     */
 
+    private func displayErrorLbl(withText text: String) {
+        errorLbl.text = text
+        UIView.animate(
+            withDuration: 5,
+            delay: 0,
+            usingSpringWithDamping: 1,
+            initialSpringVelocity: 1,
+            options: .curveEaseInOut,
+            animations: { [weak self] in
+                self?.errorLbl.alpha = 1
+            }
+        ) { [weak self] _ in
+            self?.errorLbl.alpha = 0
+        }
+    }
 }

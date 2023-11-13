@@ -28,7 +28,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OMS-9G-YcU">
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OMS-9G-YcU">
                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="0.0"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="1" green="0.13226021860000001" blue="0.1891721251" alpha="0.89080608439999998" colorSpace="custom" customColorSpace="displayP3"/>
@@ -88,11 +88,47 @@
                         <outlet property="emailTF" destination="kss-sg-0rb" id="A0I-pN-Xlp"/>
                         <outlet property="errorLbl" destination="OMS-9G-YcU" id="KIA-dn-kg7"/>
                         <outlet property="passwordTF" destination="igN-3j-Kr5" id="p3f-dk-McU"/>
+                        <segue destination="1GR-9s-U9h" kind="show" identifier="goToTasksTVC" id="618-qr-Owc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="825" y="4"/>
+        </scene>
+        <!--Tasks-->
+        <scene sceneID="t6D-q3-l6J">
+            <objects>
+                <tableViewController id="1GR-9s-U9h" customClass="TasksTVC" customModule="FirebaseHW" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="YPi-3h-Ski">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="gyP-Gg-Pn9">
+                                <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gyP-Gg-Pn9" id="EuG-BO-hGG">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="1GR-9s-U9h" id="dzt-dx-Zvj"/>
+                            <outlet property="delegate" destination="1GR-9s-U9h" id="H8r-Pr-PI2"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Tasks" id="qBb-Zb-edb">
+                        <barButtonItem key="leftBarButtonItem" title="Sign Out" id="g4H-uw-WKG"/>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="iD8-GX-Wxa"/>
+                            <barButtonItem title="AddImage" id="as9-kD-Gjx"/>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dis-I8-J41" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1547" y="4"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="uxJ-dR-IGt">
