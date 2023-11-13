@@ -125,7 +125,11 @@
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="add" id="iD8-GX-Wxa"/>
+                            <barButtonItem systemItem="add" id="iD8-GX-Wxa">
+                                <connections>
+                                    <action selector="addTask:" destination="1GR-9s-U9h" id="kjU-zP-7z8"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem title="AddImage" id="as9-kD-Gjx"/>
                         </rightBarButtonItems>
                     </navigationItem>

@@ -23,8 +23,27 @@ class TasksTVC: UITableViewController {
         ref = Database.database().reference(withPath: "users").child(user.uid).child("tasks")
     }
     
-    
-    
+    @IBAction func addTask(_ sender: UIBarButtonItem) {
+        let alertController = UIAlertController(title: "New task",
+                                                message: "Add new task",
+                                                preferredStyle: .alert)
+        alertController.addTextField()
+        
+        let save = UIAlertAction(title: "Save", style: .default) { [weak self] _ in
+            guard let self,
+                  let textField = alertController.textFields?.first,
+                  let text = textField.text
+            else { return }
+            let uid = user.uid
+            let task = Task(title: text, userId: uid)
+            let taskRef = ref.child(task.title.lowercased())
+            taskRef.setValue(task.convertToDictionary())
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        alertController.addAction(save)
+        alertController.addAction(cancel)
+        present(alertController, animated: true)
+    }
     
     @IBAction func signOut(_ sender: UIBarButtonItem) {
         do {
