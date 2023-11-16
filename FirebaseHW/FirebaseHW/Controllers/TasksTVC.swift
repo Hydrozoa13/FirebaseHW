@@ -70,7 +70,8 @@ class TasksTVC: UITableViewController {
     
     @IBAction func addImage(_ sender: UIBarButtonItem) {
         let storageRef = Storage.storage().reference()
-        let imageRef = storageRef.child("image.jpeg")
+        let uuid = UUID().uuidString
+        let imageRef = storageRef.child(uuid)
         guard let imageData = #imageLiteral(resourceName: "image.jpeg").pngData() else { return }
         let uploadTask = imageRef.putData(imageData)
     }
