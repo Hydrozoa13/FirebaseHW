@@ -81,6 +81,15 @@ class TasksTVC: UITableViewController {
         toggleCompletion(cell: cell, isCompleted: task.completed)
         return cell
     }
+    
+    // MARK: - Table view delegate
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let _ = tableView.cellForRow(at: indexPath) else { return }
+        let task = tasks[indexPath.row]
+        let isCompleted = !task.completed
+        task.ref.updateChildValues(["completed" : isCompleted])
+    }
 
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool { true }
 
@@ -92,6 +101,8 @@ class TasksTVC: UITableViewController {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
+    
+    // MARK: - Private functions
     
     private func toggleCompletion(cell: UITableViewCell, isCompleted: Bool) {
         cell.accessoryType = isCompleted ? .checkmark : .none
