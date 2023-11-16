@@ -68,6 +68,13 @@ class TasksTVC: UITableViewController {
         navigationController?.popToRootViewController(animated: true)
     }
     
+    @IBAction func addImage(_ sender: UIBarButtonItem) {
+        let storageRef = Storage.storage().reference()
+        let imageRef = storageRef.child("image.jpeg")
+        guard let imageData = #imageLiteral(resourceName: "image.jpeg").pngData() else { return }
+        let uploadTask = imageRef.putData(imageData)
+    }
+    
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

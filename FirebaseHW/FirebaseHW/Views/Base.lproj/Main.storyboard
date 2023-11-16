@@ -130,7 +130,11 @@
                                     <action selector="addTask:" destination="1GR-9s-U9h" id="kjU-zP-7z8"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="AddImage" id="as9-kD-Gjx"/>
+                            <barButtonItem title="AddImage" id="as9-kD-Gjx">
+                                <connections>
+                                    <action selector="addImage:" destination="1GR-9s-U9h" id="QR2-ax-fO7"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                 </tableViewController>
