@@ -73,7 +73,19 @@ class TasksTVC: UITableViewController {
         let uuid = UUID().uuidString
         let imageRef = storageRef.child(uuid)
         guard let imageData = #imageLiteral(resourceName: "image.jpeg").pngData() else { return }
-        let uploadTask = imageRef.putData(imageData)
+        let uploadTask = imageRef.putData(imageData) { storageMetadata, error in
+            print(storageMetadata)
+            print(error)
+            
+            let downloadTask = imageRef.getData(maxSize: 49999999) { data, error in
+                if let error {
+                    print(error)
+                } else if let data {
+                    let image = UIImage(data: data)
+                }
+            }
+        }
+        
     }
     
     // MARK: - Table view data source
