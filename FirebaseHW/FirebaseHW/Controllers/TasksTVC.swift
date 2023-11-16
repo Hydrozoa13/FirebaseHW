@@ -68,6 +68,26 @@ class TasksTVC: UITableViewController {
         navigationController?.popToRootViewController(animated: true)
     }
     
+    @IBAction func addImage(_ sender: UIBarButtonItem) {
+        let storageRef = Storage.storage().reference()
+        let uuid = UUID().uuidString
+        let imageRef = storageRef.child(uuid)
+        guard let imageData = #imageLiteral(resourceName: "image.jpeg").pngData() else { return }
+        let uploadTask = imageRef.putData(imageData) { storageMetadata, error in
+            print(storageMetadata)
+            print(error)
+            
+            let downloadTask = imageRef.getData(maxSize: 49999999) { data, error in
+                if let error {
+                    print(error)
+                } else if let data {
+                    let image = UIImage(data: data)
+                }
+            }
+        }
+        
+    }
+    
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -81,17 +101,25 @@ class TasksTVC: UITableViewController {
         toggleCompletion(cell: cell, isCompleted: task.completed)
         return cell
     }
+    
+    // MARK: - Table view delegate
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let _ = tableView.cellForRow(at: indexPath) else { return }
+        let task = tasks[indexPath.row]
+        let isCompleted = !task.completed
+        task.ref.updateChildValues(["completed" : isCompleted])
+    }
 
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool { true }
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        guard editingStyle == .delete else { return }
+        let task = tasks[indexPath.row]
+        task.ref.removeValue()
     }
+    
+    // MARK: - Private functions
     
     private func toggleCompletion(cell: UITableViewCell, isCompleted: Bool) {
         cell.accessoryType = isCompleted ? .checkmark : .none
